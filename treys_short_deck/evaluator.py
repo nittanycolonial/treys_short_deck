@@ -111,6 +111,7 @@ class Evaluator(object):
         elif hr <= LookupTable.MAX_HIGH_CARD:
             return LookupTable.MAX_TO_RANK_CLASS[LookupTable.MAX_HIGH_CARD]
         else:
+            print('Bad rank: ' + str(hr))
             raise Exception("Inavlid hand rank, cannot return rank class")
 
     def class_to_string(self, class_int):
@@ -144,7 +145,7 @@ class Evaluator(object):
             line = "=" * line_length
             print("{} {} {}".format(line,stages[i],line))
             
-            best_rank = 7463  # rank one worse than worst hand
+            best_rank = 1405  # rank one worse than worst hand
             winners = []
             for player, hand in enumerate(hands):
 

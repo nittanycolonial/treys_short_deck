@@ -6,15 +6,15 @@ class LookupTable(object):
     """
     Number of Distinct Hand Values:
 
-    Straight Flush   10 
-    Four of a Kind   156      [(13 choose 2) * (2 choose 1)]
-    Full Houses      156      [(13 choose 2) * (2 choose 1)]
-    Flush            1277     [(13 choose 5) - 10 straight flushes]
-    Straight         10 
-    Three of a Kind  858      [(13 choose 3) * (3 choose 1)]
-    Two Pair         858      [(13 choose 3) * (3 choose 2)]
-    One Pair         2860     [(13 choose 4) * (4 choose 1)]
-    High Card      + 1277     [(13 choose 5) - 10 straights]
+    Straight Flush   6 
+    Four of a Kind   156      [(9 choose 2) * (2 choose 1)]
+    Full Houses      156      [(9 choose 2) * (2 choose 1)]
+    Flush            1277     [(9 choose 5) - 6 straight flushes]
+    Straight         6 
+    Three of a Kind  858      [(9 choose 3) * (3 choose 1)]
+    Two Pair         858      [(9 choose 3) * (3 choose 2)]
+    One Pair         2860     [(9 choose 4) * (4 choose 1)]
+    High Card      + 1277     [(9 choose 5) - 6 straights]
     -------------------------
     TOTAL            7462
 
@@ -25,15 +25,15 @@ class LookupTable(object):
     * Royal flush (best hand possible)          => 1
     * 7-5-4-3-2 unsuited (worst hand possible)  => 7462
     """
-    MAX_STRAIGHT_FLUSH  = 10
-    MAX_FOUR_OF_A_KIND  = 166
-    MAX_FULL_HOUSE      = 322 
-    MAX_FLUSH           = 1599
-    MAX_STRAIGHT        = 1609
-    MAX_THREE_OF_A_KIND = 2467
-    MAX_TWO_PAIR        = 3325
-    MAX_PAIR            = 6185
-    MAX_HIGH_CARD       = 7462
+    MAX_STRAIGHT_FLUSH  = 6
+    MAX_FOUR_OF_A_KIND  = 78
+    MAX_FULL_HOUSE      = 150 
+    MAX_FLUSH           = 270
+    MAX_STRAIGHT        = 276
+    MAX_THREE_OF_A_KIND = 528
+    MAX_TWO_PAIR        = 780
+    MAX_PAIR            = 1284
+    MAX_HIGH_CARD       = 1404
 
     MAX_TO_RANK_CLASS = {
         MAX_STRAIGHT_FLUSH: 1,
@@ -88,11 +88,7 @@ class LookupTable(object):
             1984,  # int('0b11111000000', 2),
             992,   # int('0b1111100000', 2),
             496,   # int('0b111110000', 2),
-            248,   # int('0b11111000', 2),
-            124,   # int('0b1111100', 2),
-            62,    # int('0b111110', 2),
-            31,    # int('0b11111', 2),
-            4111   # int('0b1000000001111', 2) # 5 high
+            248   # int('0b11111000', 2)
         ]
 
         # now we'll dynamically generate all the other
@@ -102,7 +98,7 @@ class LookupTable(object):
 
         # 1277 = number of high cards
         # 1277 + len(str_flushes) is number of hands with all cards unique rank
-        for i in range(1277 + len(straight_flushes) - 1):   # we also iterate over SFs
+        for i in range(120 + len(straight_flushes) - 1):   # we also iterate over SFs
             # pull the next flush pattern from our generator
             f = next(gen)
 
